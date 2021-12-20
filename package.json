@@ -1,0 +1,16 @@
+{
+  "name": "FunWithFlights",
+  "version": "1.0.0",
+  "repository": "https://github.com/nkalinov/FunWithFlights.git",
+  "author": "nkalinov <kozzleto@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  },
+  "packageManager": "yarn@3.1.1"
+}

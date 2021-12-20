@@ -1,0 +1,7 @@
+**/*/Dockerfile*
+.git
+.gitignore
+.prettierrc
+docker-compose*
+**/*/node_modules
+web-admin/build

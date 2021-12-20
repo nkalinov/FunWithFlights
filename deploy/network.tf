@@ -44,14 +44,14 @@ resource "aws_subnet" "private_b" {
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.app_vpc.id
-  tags   = {
+  tags = {
     "Name" = "fwf | public"
   }
 }
 
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.app_vpc.id
-  tags   = {
+  tags = {
     "Name" = "fwf | private"
   }
 }

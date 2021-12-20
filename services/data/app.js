@@ -14,8 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/v1', routesV1);
-app.use('/health', (req, res) => {
+app.use('/api/data/v1', routesV1);
+app.use('/api/data/health', (req, res) => {
   res.sendStatus(200);
 });
 

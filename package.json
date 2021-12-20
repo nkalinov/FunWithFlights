@@ -1,5 +1,5 @@
 {
-  "name": "FunWithFlights",
+  "name": "@fwf/root",
   "version": "1.0.0",
   "repository": "https://github.com/nkalinov/FunWithFlights.git",
   "author": "nkalinov <kozzleto@gmail.com>",

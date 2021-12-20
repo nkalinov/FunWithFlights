@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  data-service:
+    command: yarn workspace @fwf/services-data dev
+    volumes:
+      - ./:/app:cached
+      # must be rebuilt because of macos-linux binaries incompatibility
+      - /app/node_modules
+    ports:
+      - '9230:9230'
+    environment:
+      - NODE_ENV=development
+
+  nginx:
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro

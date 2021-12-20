@@ -4,4 +4,8 @@
 .prettierrc
 docker-compose*
 **/*/node_modules
-web-admin/build
+packages/web-main/build
+packages/web-admin/build
+**/*/.terraform
+*.tf
+*.hcl

@@ -22,6 +22,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fwf/root@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@fwf/root@workspace:."
+  dependencies:
+    prettier: ^2.5.1
+  languageName: unknown
+  linkType: soft
+
+"@fwf/services-data@workspace:services/data":
+  version: 0.0.0-use.local
+  resolution: "@fwf/services-data@workspace:services/data"
+  dependencies:
+    cookie-parser: ^1.4.4
+    debug: ^4.3.3
+    eslint: ^8.5.0
+    express: ^4.16.1
+    morgan: ^1.9.1
+    node-fetch: ^3.1.0
+    nodemon: ^2.0.15
+  languageName: unknown
+  linkType: soft
+
 "@gar/promisify@npm:^1.0.1":
   version: 1.1.2
   resolution: "@gar/promisify@npm:1.1.2"
@@ -114,14 +136,6 @@ __metadata:
   checksum: e99fc7cc6265407987b30deda54c1c24bb1478803faf6037557a774b2f034c5b097ffd65847daa87e82a61a250d919f35c3588654b0fdaa816906650f596d1b0
   languageName: node
   linkType: hard
-
-"FunWithFlights@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "FunWithFlights@workspace:."
-  dependencies:
-    prettier: ^2.5.1
-  languageName: unknown
-  linkType: soft
 
 "abbrev@npm:1":
   version: 1.1.1
@@ -594,20 +608,6 @@ __metadata:
   checksum: a010653869abe8bb51259432894ac62c52bf79ad761d418d94396f48c346f2ae739c46b254e8bb5987bded8a653d467db1968db3a69bab1d33aa5567baa5cfc7
   languageName: node
   linkType: hard
-
-"data@workspace:services/data":
-  version: 0.0.0-use.local
-  resolution: "data@workspace:services/data"
-  dependencies:
-    cookie-parser: ^1.4.4
-    debug: ^4.3.3
-    eslint: ^8.5.0
-    express: ^4.16.1
-    morgan: ^1.9.1
-    node-fetch: ^3.1.0
-    nodemon: ^2.0.15
-  languageName: unknown
-  linkType: soft
 
 "debug@npm:2.6.9":
   version: 2.6.9

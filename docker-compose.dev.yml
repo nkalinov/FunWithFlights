@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   data-service:
-    command: yarn workspace @fwf/services-data dev
+    build:
+      context: .
+      dockerfile: services/data/Dockerfile.dev
     volumes:
       - ./:/app:cached
       # must be rebuilt because of macos-linux binaries incompatibility

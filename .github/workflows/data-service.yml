@@ -55,3 +55,7 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f services/data/Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Update ECS
+        # todo: move arguments to GH secrets
+        run: aws ecs update-service --cluster funwithflights --service funwithflights-data-service --force-new-deployment

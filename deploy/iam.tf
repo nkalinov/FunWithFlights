@@ -17,7 +17,7 @@ resource "aws_iam_user_policy_attachment" "publisher_policy_AmazonS3FullAccess" 
   user       = aws_iam_user.github.name
 }
 resource "aws_iam_user_policy_attachment" "publisher_policy_AmazonECS_FullAccess" {
-  policy_arn = "arn:aws:iam::aws:policy/arn:aws:iam::aws:policy/AmazonECS_FullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
   user       = aws_iam_user.github.name
 }
 

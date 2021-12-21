@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "web_main" {
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  comment  = "cloudfront origin access identity"
+  comment = "cloudfront origin access identity"
 }
 
 # Custom policy for CF to access the bucket

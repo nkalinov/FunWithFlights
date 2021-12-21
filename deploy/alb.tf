@@ -23,13 +23,13 @@ resource "aws_alb_listener" "funwithflights_service_http" {
   protocol          = "HTTP"
 
   default_action {
-#    type             = "forward"
-#    target_group_arn = aws_lb_target_group.funwithflights_service.arn
-    type            = "fixed-response"
+    #    type             = "forward"
+    #    target_group_arn = aws_lb_target_group.funwithflights_service.arn
+    type = "fixed-response"
     fixed_response {
-      status_code   = "404"
-      content_type  = "text/plain"
-      message_body  = "Hello world"
+      status_code  = "404"
+      content_type = "text/plain"
+      message_body = "Hello world"
     }
   }
 }

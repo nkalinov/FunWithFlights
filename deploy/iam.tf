@@ -16,6 +16,10 @@ resource "aws_iam_user_policy_attachment" "publisher_policy_AmazonS3FullAccess" 
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
   user       = aws_iam_user.github.name
 }
+resource "aws_iam_user_policy_attachment" "publisher_policy_AWSCodeDeployRoleForECS" {
+  policy_arn = "arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS"
+  user       = aws_iam_user.github.name
+}
 
 resource "aws_iam_access_key" "publisher" {
   user = aws_iam_user.github.name

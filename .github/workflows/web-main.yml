@@ -21,6 +21,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install
+        id: install
+        working-directory: packages/web-main
+        run: yarn install
+
       - name: Build
         id: build
         working-directory: packages/web-main
@@ -29,4 +34,4 @@ jobs:
       - name: S3 copy
         id: s3-copy
         working-directory: packages/web-main
-        run: aws s3 cp out s3://s3-web-main --recursive
+        run: aws s3 cp out s3://${{ secrets.S3_BUCKET_WEB_MAIN }} --recursive

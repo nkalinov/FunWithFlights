@@ -23,4 +23,4 @@ ENV PORT 3000
 EXPOSE $PORT
 
 WORKDIR /app/service
-CMD ["node", "app.js"]
+CMD ["node", "dist/main.js"]

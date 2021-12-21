@@ -1,7 +1,3 @@
-resource "aws_ecs_cluster" "funwithflights_cluster" {
-  name = "funwithflights"
-}
-
 resource "aws_ecs_task_definition" "funwithflights_data_service" {
   family             = "funwithflights-data-service"
   execution_role_arn = aws_iam_role.funwithflights_data_service_task_execution_role.arn
@@ -110,9 +106,44 @@ data "aws_iam_policy_document" "ecs_task_assume_role" {
 data "aws_iam_policy" "ecs_task_execution_role" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
-
 # Attach the above policy to the execution role.
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
   role       = aws_iam_role.funwithflights_data_service_task_execution_role.name
   policy_arn = data.aws_iam_policy.ecs_task_execution_role.arn
+}
+
+# Give task access to Dynamo
+resource "aws_iam_policy" "dynamodb" {
+  name        = "funwithflights-data-service-task-policy-dynamodb"
+  description = "Policy that allows access to DynamoDB"
+
+  policy = <<EOF
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "dynamodb:CreateTable",
+               "dynamodb:UpdateTimeToLive",
+               "dynamodb:PutItem",
+               "dynamodb:DescribeTable",
+               "dynamodb:ListTables",
+               "dynamodb:DeleteItem",
+               "dynamodb:GetItem",
+               "dynamodb:Scan",
+               "dynamodb:Query",
+               "dynamodb:UpdateItem",
+               "dynamodb:UpdateTable"
+           ],
+           "Resource": "*"
+       }
+   ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
+  role       = aws_iam_role.funwithflights_data_service_task_execution_role.name
+  policy_arn = aws_iam_policy.dynamodb.arn
 }

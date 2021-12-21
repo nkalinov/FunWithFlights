@@ -11,7 +11,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to FunWithFlights!</h1>
-        <p className={styles.description}>Compare flight options.</p>
+        <p className={styles.description}>Compare flight options:</p>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>

@@ -10,6 +10,7 @@
     "test": "echo \"No tests yet\""
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.44.0",
     "cookie-parser": "^1.4.4",
     "debug": "^4.3.3",
     "express": "^4.16.1",

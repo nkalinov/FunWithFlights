@@ -29,7 +29,7 @@ resource "aws_alb_listener" "funwithflights_service_http" {
     fixed_response {
       status_code  = "404"
       content_type = "text/plain"
-      message_body = "Hello world"
+      message_body = "Not Found"
     }
   }
 }

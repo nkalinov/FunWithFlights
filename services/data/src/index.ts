@@ -14,8 +14,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// ALB can't strip prefixes yet but it's okay given that our infra is stored in the repo
+// Check aws_lb_listener_rule.lb_path_data_service
 app.use('/api/data/v1', routesV1);
-app.use('/api/data/health', (req: Request, res: Response) => {
+
+// ECS health check endpoint (without the prefix because it's a LB-wide config)
+app.use('/health', (req: Request, res: Response) => {
   res.sendStatus(200);
 });
 

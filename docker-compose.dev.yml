@@ -11,8 +11,17 @@ services:
       - /app/node_modules
     ports:
       - '9230:9230'
-    environment:
-      - NODE_ENV=development
+
+  web-main:
+    build:
+      context: .
+      dockerfile: packages/web-main/Dockerfile.dev
+    volumes:
+      - ./:/app:cached
+      # must be rebuilt because of macos-linux binaries incompatibility
+      - /app/node_modules
+    ports:
+      - '3007:3007'
 
   nginx:
     ports:

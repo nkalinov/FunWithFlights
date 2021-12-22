@@ -117,30 +117,28 @@ resource "aws_iam_policy" "dynamodb" {
   name        = "funwithflights-data-service-task-policy-dynamodb"
   description = "Policy that allows access to DynamoDB"
 
-  policy = <<EOF
-{
-   "Version": "2012-10-17",
-   "Statement": [
-       {
-           "Effect": "Allow",
-           "Action": [
-               "dynamodb:CreateTable",
-               "dynamodb:UpdateTimeToLive",
-               "dynamodb:PutItem",
-               "dynamodb:DescribeTable",
-               "dynamodb:ListTables",
-               "dynamodb:DeleteItem",
-               "dynamodb:GetItem",
-               "dynamodb:Scan",
-               "dynamodb:Query",
-               "dynamodb:UpdateItem",
-               "dynamodb:UpdateTable"
-           ],
-           "Resource": "*"
-       }
-   ]
-}
-EOF
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "dynamodb:CreateTable",
+          "dynamodb:UpdateTimeToLive",
+          "dynamodb:PutItem",
+          "dynamodb:DescribeTable",
+          "dynamodb:ListTables",
+          "dynamodb:DeleteItem",
+          "dynamodb:GetItem",
+          "dynamodb:Scan",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem",
+          "dynamodb:UpdateTable"
+        ],
+        "Resource" : "*"
+      }
+    ]
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_dynamo_policy" {

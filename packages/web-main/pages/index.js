@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.scss';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   return (
@@ -12,13 +13,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to FunWithFlights!</h1>
         <p className={styles.description}>Compare flight options:</p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-        </div>
+        <Routes />
       </main>
 
       <footer className={styles.footer}>
@@ -26,6 +21,70 @@ export default function Home() {
           Powered by EPAM.
         </a>
       </footer>
+    </div>
+  );
+}
+
+function Routes() {
+  const [fetchState, setFetchState] = useState({
+    status: 'pending',
+    error: null,
+    data: null,
+  });
+
+  useEffect(() => {
+    async function fetchRoutes() {
+      try {
+        setFetchState(s => ({
+          ...s,
+          status: 'fetching',
+        }));
+        const data = await fetch('/api/data/v1/routes').then(res => res.json());
+        setFetchState({
+          status: 'ok',
+          data,
+        });
+      } catch (e) {
+        setFetchState({
+          status: 'error',
+          error: e,
+        });
+        throw e;
+      }
+    }
+
+    let intervalId;
+    fetchRoutes().then(() => {
+      intervalId = setInterval(fetchRoutes, 5000);
+    });
+    return () => clearInterval(intervalId);
+  }, []);
+
+  if (
+    (fetchState.status === 'pending' || fetchState.status === 'fetching') &&
+    !fetchState.data
+  ) {
+    return 'Loading...';
+  }
+
+  if (fetchState.status === 'error') {
+    return `Error: ${fetchState.error.message}`;
+  }
+
+  return (
+    <div className={styles.grid}>
+      {fetchState.data.map(route => (
+        <a
+          key={`${route.airline}-${route.sourceAirport}-${route.destinationAirport}`}
+          href="#"
+          className={styles.card}
+        >
+          <h2>{route.airline}</h2>
+          <p>
+            Source: {route.sourceAirport} | Destination: {route.destinationAirport}
+          </p>
+        </a>
+      ))}
     </div>
   );
 }

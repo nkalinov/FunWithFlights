@@ -7,5 +7,11 @@ services:
       dockerfile: services/data/Dockerfile
     restart: always
 
+  web-main:
+    build:
+      context: .
+      dockerfile: packages/web-main/Dockerfile
+    restart: always
+
   nginx:
     image: nginx:latest

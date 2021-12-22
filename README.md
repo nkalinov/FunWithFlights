@@ -25,3 +25,4 @@
 - [ ] Consume Dynamo from data-service (with DAX).
 - [ ] Second POC service + Route53 Private Hosted Zone for intracommunication.
 - [ ] Cognito
+- [ ] Multiple environments - (Qa, Prod).

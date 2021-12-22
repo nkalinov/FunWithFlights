@@ -58,7 +58,9 @@ jobs:
 
       - name: Update ECS
         # todo: move arguments to GH secrets
-        run: aws ecs update-service --cluster funwithflights --service funwithflights-data-service --force-new-deployment
+        run: |
+          aws ecs update-service --cluster funwithflights --service funwithflights-data-service --force-new-deployment
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DISTRIBUTION_ID }} --paths /*
 
 # todo uncomment for versioned images and task definitions
 #      - name: Download task definition

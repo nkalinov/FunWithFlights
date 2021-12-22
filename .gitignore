@@ -104,6 +104,7 @@ dist
 .tern-port
 
 .yarn/cache
+.yarn/install-state.gz
 .idea
 **/.terraform
 .env*

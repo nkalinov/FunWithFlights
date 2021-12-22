@@ -5,34 +5,31 @@ import { Route } from '../../models/Route';
 
 const router = express.Router();
 
+async function fetchProviderData(url: string) {
+  try {
+    const res = (await fetch(url).then(res => res.json())) as any;
+    if (res.errorCode) {
+      // error
+      throw new Error(res);
+    }
+    return res;
+  } catch (e) {
+    // todo logging
+    return [];
+  }
+}
+
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const [data1, data2] = await Promise.all([
-      fetch('http://ase.asmt.live:8000/provider/flights1').then(res =>
-        res.json()
-      ),
-      fetch('http://ase.asmt.live:8000/provider/flights2').then(res =>
-        res.json()
-      ),
+    const dataProviders = await Promise.all([
+      fetchProviderData('http://ase.asmt.live:8000/provider/flights1'),
+      fetchProviderData('http://ase.asmt.live:8000/provider/flights2'),
+      fetchProviderData('http://ase.asmt.live:8000/provider/flights3'),
     ]);
-
-    // todo group by hashkey
-    // const data1ByHash = (data1 as [Route]).reduce((acc: any, route: Route) => {
-    //   acc[
-    //     `${route.airline}_${route.sourceAirport}__${route.destinationAirport}`
-    //   ] = route;
-    //   return acc;
-    // }, {});
-    // const data2ByHash = (data1 as [Route]).reduce((acc: any, route: Route) => {
-    //   acc[
-    //     `${route.airline}_${route.sourceAirport}__${route.destinationAirport}`
-    //   ] = route;
-    //   return acc;
-    // }, {});
 
     // todo leave only the cheapest per hashkey
 
-    const data = (data1 as [Route]).concat(data2 as [Route]);
+    const data = dataProviders.flat();
     //   .reduce((acc: any, route: Route) => {
     //   const hash = `${route.airline}_${route.sourceAirport}__${route.destinationAirport}`;
     //   acc[

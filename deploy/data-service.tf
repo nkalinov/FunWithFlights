@@ -143,5 +143,5 @@ resource "aws_iam_policy" "dynamodb" {
 
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_dynamo_policy" {
   role       = aws_iam_role.funwithflights_data_service_task_execution_role.name
-  policy_arn = aws_iam_policy.dynamodb.arn
+  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess" # aws_iam_policy.dynamodb.arn
 }

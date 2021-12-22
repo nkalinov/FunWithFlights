@@ -6,41 +6,45 @@ import { Route } from '../../models/Route';
 const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
-  // just some mock data for the demo
-  res.json([
-    {
-      airline: '2B',
-      sourceAirport: 'AER',
-      destinationAirport: 'KZN',
-      codeShare: '',
-      stops: 0,
-      equipment: 'CR2',
-    },
-    {
-      airline: '2B',
-      sourceAirport: 'ASF',
-      destinationAirport: 'KZN',
-      codeShare: '',
-      stops: 0,
-      equipment: 'CR2',
-    },
-    {
-      airline: '2B',
-      sourceAirport: 'ASF',
-      destinationAirport: 'MRV',
-      codeShare: '',
-      stops: 0,
-      equipment: 'CR2',
-    },
-    {
-      airline: '2B',
-      sourceAirport: 'CEK',
-      destinationAirport: 'KZN',
-      codeShare: '',
-      stops: 0,
-      equipment: 'CR2',
-    },
-  ]);
+  try {
+    const [data1, data2] = await Promise.all([
+      fetch('http://ase.asmt.live:8000/provider/flights1').then(res =>
+        res.json()
+      ),
+      fetch('http://ase.asmt.live:8000/provider/flights2').then(res =>
+        res.json()
+      ),
+    ]);
+
+    // todo group by hashkey
+    // const data1ByHash = (data1 as [Route]).reduce((acc: any, route: Route) => {
+    //   acc[
+    //     `${route.airline}_${route.sourceAirport}__${route.destinationAirport}`
+    //   ] = route;
+    //   return acc;
+    // }, {});
+    // const data2ByHash = (data1 as [Route]).reduce((acc: any, route: Route) => {
+    //   acc[
+    //     `${route.airline}_${route.sourceAirport}__${route.destinationAirport}`
+    //   ] = route;
+    //   return acc;
+    // }, {});
+
+    // todo leave only the cheapest per hashkey
+
+    const data = (data1 as [Route]).concat(data2 as [Route]);
+    //   .reduce((acc: any, route: Route) => {
+    //   const hash = `${route.airline}_${route.sourceAirport}__${route.destinationAirport}`;
+    //   acc[
+    //
+    //     ] = route;
+    //   return acc;
+    // }, {});
+
+    res.json(data);
+  } catch (e) {
+    res.status(500).send(e);
+  }
 });
 
 router.get('/dynamo', async (req: Request, res: Response) => {

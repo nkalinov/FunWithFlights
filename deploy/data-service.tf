@@ -143,7 +143,7 @@ resource "aws_iam_policy" "dynamodb" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
+resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_dynamo_policy" {
   role       = aws_iam_role.funwithflights_data_service_task_execution_role.name
   policy_arn = aws_iam_policy.dynamodb.arn
 }

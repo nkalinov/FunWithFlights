@@ -20,3 +20,14 @@ resource "aws_dynamodb_table" "routes" {
   #    type = "S"
   #  }
 }
+
+resource "aws_dynamodb_table" "providers" {
+  hash_key     = "id"
+  name         = "providers"
+  billing_mode = "PAY_PER_REQUEST"
+
+  attribute {
+    name = "id"
+    type = "S"
+  }
+}
